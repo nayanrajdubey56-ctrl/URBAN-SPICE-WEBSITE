@@ -1,0 +1,2236 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>URBAN SPICE | Taste the Extraordinary</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    /* =====================================================
+       URBAN SPICE
+       PREMIUM RESTAURANT WEBSITE
+       ===================================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #0b0b0b;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --gold: #d7a84b;
+      --gold-light: #f2cf7d;
+      --dark: #0b0b0b;
+      --dark-2: #121212;
+      --dark-3: #1b1b1b;
+      --text: #eeeeee;
+      --muted: #aaa;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1180px, 90%);
+      margin: auto;
+    }
+
+    /* =====================================================
+       NAVBAR
+       ===================================================== */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: 0.4s;
+    }
+
+    header.scrolled {
+      background: rgba(8, 8, 8, 0.94);
+      backdrop-filter: blur(15px);
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(215,168,75,0.15);
+    }
+
+    nav {
+      width: min(1200px, 92%);
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--gold-light);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #eee;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-light);
+    }
+
+    .nav-btn {
+      padding: 11px 20px;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      transition: 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: var(--gold);
+      color: #111 !important;
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      font-size: 27px;
+      color: var(--gold-light);
+    }
+
+    /* =====================================================
+       HERO
+       ===================================================== */
+
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,.88),
+          rgba(0,0,0,.58),
+          rgba(0,0,0,.25)
+        ),
+        url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=2000&q=90")
+        center/cover;
+    }
+
+    #three-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: .28;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 750px;
+      padding-top: 60px;
+    }
+
+    .eyebrow {
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(65px, 10vw, 125px);
+      line-height: .82;
+      font-weight: 600;
+      margin-bottom: 28px;
+    }
+
+    .hero-title span {
+      color: var(--gold-light);
+    }
+
+    .hero-subtitle {
+      color: #ddd;
+      font-size: 18px;
+      line-height: 1.8;
+      max-width: 570px;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 28px;
+      border: 1px solid var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 12px;
+      transition: .35s;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #111;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(215,168,75,.2);
+    }
+
+    .btn-outline {
+      color: white;
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #aaa;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      z-index: 3;
+    }
+
+    /* =====================================================
+       SECTION COMMON
+       ===================================================== */
+
+    section {
+      padding: 110px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-heading small {
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 11px;
+    }
+
+    .section-heading h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(45px, 6vw, 70px);
+      margin: 12px 0;
+    }
+
+    .section-heading p {
+      max-width: 620px;
+      margin: auto;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* =====================================================
+       ABOUT
+       ===================================================== */
+
+    #about {
+      background: var(--dark-2);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .about-image {
+      height: 600px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1s;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.06);
+    }
+
+    .about-content h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
+
+    .about-content p {
+      color: #aaa;
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 35px;
+    }
+
+    .stat {
+      border-left: 1px solid var(--gold);
+      padding-left: 15px;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--gold-light);
+      font-size: 30px;
+    }
+
+    .stat span {
+      color: #999;
+      font-size: 12px;
+    }
+
+    /* =====================================================
+       MENU
+       ===================================================== */
+
+    #menu {
+      background: #090909;
+    }
+
+    .menu-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 45px;
+    }
+
+    .menu-tab {
+      background: transparent;
+      border: 1px solid #333;
+      color: #aaa;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: .3s;
+    }
+
+    .menu-tab.active,
+    .menu-tab:hover {
+      background: var(--gold);
+      color: #111;
+      border-color: var(--gold);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .menu-item {
+      background: var(--dark-3);
+      padding: 22px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      transition: .35s;
+      border: 1px solid transparent;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-6px);
+      border-color: rgba(215,168,75,.5);
+    }
+
+    .menu-img {
+      width: 110px;
+      height: 100px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .menu-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .5s;
+    }
+
+    .menu-item:hover img {
+      transform: scale(1.12);
+    }
+
+    .menu-info {
+      flex: 1;
+    }
+
+    .menu-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px dashed #444;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+    }
+
+    .menu-top h4 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 25px;
+    }
+
+    .price {
+      color: var(--gold-light);
+      white-space: nowrap;
+    }
+
+    .menu-info p {
+      color: #999;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* =====================================================
+       GALLERY
+       ===================================================== */
+
+    #gallery {
+      background: var(--dark-2);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .gallery-item {
+      height: 280px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-item.large {
+      grid-column: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .7s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.12);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.3);
+      opacity: 0;
+      transition: .4s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 28px;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    /* =====================================================
+       BOOKING
+       ===================================================== */
+
+    #booking {
+      background:
+        linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.8)),
+        url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=90")
+        center/cover fixed;
+    }
+
+    .booking-box {
+      max-width: 900px;
+      margin: auto;
+      background: rgba(15,15,15,.88);
+      backdrop-filter: blur(10px);
+      padding: 50px;
+      border: 1px solid rgba(215,168,75,.3);
+    }
+
+    .booking-form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-group.full {
+      grid-column: span 2;
+    }
+
+    .form-group label {
+      color: #aaa;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: #191919;
+      color: white;
+      border: 1px solid #333;
+      padding: 14px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .form-group textarea {
+      height: 100px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .booking-form button {
+      grid-column: span 2;
+      padding: 15px;
+      border: 0;
+      background: var(--gold);
+      color: #111;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: .3s;
+    }
+
+    .booking-form button:hover {
+      background: var(--gold-light);
+      transform: translateY(-3px);
+    }
+
+    /* =====================================================
+       REVIEWS
+       ===================================================== */
+
+    #reviews {
+      background: #090909;
+    }
+
+    .review-container {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .review {
+      display: none;
+      animation: fadeIn .5s ease;
+    }
+
+    .review.active {
+      display: block;
+    }
+
+    .stars {
+      color: var(--gold-light);
+      font-size: 24px;
+      margin-bottom: 20px;
+      letter-spacing: 5px;
+    }
+
+    .review p {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 31px;
+      line-height: 1.4;
+      color: #eee;
+    }
+
+    .review h4 {
+      margin-top: 25px;
+      color: var(--gold-light);
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    .review-controls {
+      margin-top: 30px;
+    }
+
+    .review-controls button {
+      background: transparent;
+      border: 1px solid #444;
+      color: white;
+      width: 45px;
+      height: 45px;
+      margin: 5px;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .review-controls button:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    /* =====================================================
+       CONTACT
+       ===================================================== */
+
+    #contact {
+      background: var(--dark-2);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .contact-card {
+      background: #171717;
+      padding: 35px;
+      text-align: center;
+      border: 1px solid #252525;
+      transition: .3s;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(215,168,75,.5);
+    }
+
+    .contact-icon {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .contact-card h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .contact-card p {
+      color: #999;
+      line-height: 1.7;
+      font-size: 13px;
+    }
+
+    /* =====================================================
+       FOOTER
+       ===================================================== */
+
+    footer {
+      background: #060606;
+      padding: 65px 0 25px;
+      border-top: 1px solid #202020;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-brand h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 45px;
+      color: var(--gold-light);
+    }
+
+    .footer-brand p {
+      color: #777;
+      max-width: 350px;
+      line-height: 1.8;
+      margin-top: 12px;
+    }
+
+    .footer-col h4 {
+      color: white;
+      margin-bottom: 18px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .footer-col a {
+      display: block;
+      color: #777;
+      margin: 10px 0;
+      font-size: 13px;
+      transition: .3s;
+    }
+
+    .footer-col a:hover {
+      color: var(--gold-light);
+    }
+
+    .copyright {
+      border-top: 1px solid #222;
+      padding-top: 22px;
+      text-align: center;
+      color: #555;
+      font-size: 12px;
+    }
+
+    /* =====================================================
+       ANIMATIONS
+       ===================================================== */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: 1s;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+
+    @media (max-width: 900px) {
+
+      .nav-links {
+        position: absolute;
+        top: 75px;
+        left: 5%;
+        width: 90%;
+        background: #111;
+        flex-direction: column;
+        padding: 25px;
+        gap: 20px;
+        display: none;
+        border: 1px solid #292929;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .nav-btn {
+        display: none;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-image {
+        height: 450px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      section {
+        padding: 80px 0;
+      }
+
+      .hero-title {
+        font-size: 70px;
+      }
+
+      .hero-subtitle {
+        font-size: 15px;
+      }
+
+      .about-image {
+        height: 350px;
+      }
+
+      .about-content h3 {
+        font-size: 42px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-item {
+        align-items: flex-start;
+      }
+
+      .menu-img {
+        width: 85px;
+        height: 85px;
+      }
+
+      .menu-top h4 {
+        font-size: 21px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item,
+      .gallery-item.large {
+        grid-column: span 1;
+        height: 300px;
+      }
+
+      .booking-box {
+        padding: 25px;
+      }
+
+      .booking-form {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full,
+      .booking-form button {
+        grid-column: span 1;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .review p {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     NAVIGATION
+     ===================================================== -->
+
+<header id="header">
+
+  <nav>
+
+    <a href="#hero" class="logo">
+      URBAN SPICE
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <a href="#booking" class="nav-btn">Reserve Table</a>
+
+    <div class="hamburger" id="hamburger">
+      ☰
+    </div>
+
+  </nav>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+
+<section id="hero">
+
+  <div id="three-bg"></div>
+
+  <div class="container">
+
+    <div class="hero-content reveal">
+
+      <div class="eyebrow">
+        Fine Dining • Since 2018
+      </div>
+
+      <h1 class="hero-title">
+        Taste the <span>Extraordinary.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        An unforgettable culinary experience where bold flavours,
+        elegant presentation and modern hospitality come together.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#menu" class="btn btn-primary">
+          Explore Menu
+        </a>
+
+        <a href="#booking" class="btn btn-outline">
+          Reserve a Table
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="scroll-down">
+    Scroll to explore ↓
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     ABOUT
+     ===================================================== -->
+
+<section id="about">
+
+  <div class="container">
+
+    <div class="section-heading reveal">
+
+      <small>Our Story</small>
+
+      <h2>Where Passion Meets Plate</h2>
+
+      <p>
+        We believe exceptional food is more than a meal.
+        It is an experience that stays with you.
+      </p>
+
+    </div>
+
+
+    <div class="about-grid">
+
+      <div class="about-image reveal">
+
+        <!-- REPLACE IMAGE URL HERE -->
+        <img
+          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85"
+          alt="Restaurant food">
+
+      </div>
+
+
+      <div class="about-content reveal">
+
+        <h3>A Modern Expression of Flavour</h3>
+
+        <p>
+          URBAN SPICE was created with one simple idea:
+          bring extraordinary food and memorable hospitality
+          together under one roof.
+        </p>
+
+        <p>
+          Our chefs combine traditional techniques with
+          contemporary creativity to create dishes that
+          surprise, delight and inspire.
+        </p>
+
+        <div class="stats">
+
+          <div class="stat">
+            <strong>8+</strong>
+            <span>Years of Excellence</span>
+          </div>
+
+          <div class="stat">
+            <strong>42K+</strong>
+            <span>Happy Guests</span>
+          </div>
+
+          <div class="stat">
+            <strong>4.9</strong>
+            <span>Guest Rating</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     MENU
+     ===================================================== -->
+
+<section id="menu">
+
+  <div class="container">
+
+    <div class="section-heading reveal">
+
+      <small>Our Menu</small>
+
+      <h2>Crafted With Passion</h2>
+
+      <p>
+        Explore our carefully curated selection of dishes.
+      </p>
+
+    </div>
+
+
+    <div class="menu-tabs">
+
+      <button class="menu-tab active" data-category="starters">
+        Starters
+      </button>
+
+      <button class="menu-tab" data-category="main">
+        Main Course
+      </button>
+
+      <button class="menu-tab" data-category="pizza">
+        Pizza & Pasta
+      </button>
+
+      <button class="menu-tab" data-category="dessert">
+        Desserts
+      </button>
+
+      <button class="menu-tab" data-category="drinks">
+        Drinks
+      </button>
+
+    </div>
+
+
+    <div id="menuCount" style="
+      text-align:center;
+      color:#777;
+      font-size:11px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      margin:-25px 0 28px;
+    "></div>
+
+    <div class="menu-grid" id="menuGrid"></div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     GALLERY
+     ===================================================== -->
+
+<section id="gallery">
+
+  <div class="container">
+
+    <div class="section-heading reveal">
+
+      <small>Visual Experience</small>
+
+      <h2>A Feast for the Eyes</h2>
+
+    </div>
+
+
+    <div class="gallery-grid">
+
+      <!-- REPLACE THESE IMAGE URLS -->
+
+      <div class="gallery-item large reveal">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=85" alt="Food">
+        <div class="gallery-overlay">Signature Dish</div>
+      </div>
+
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85" alt="Pizza">
+        <div class="gallery-overlay">Artisan Pizza</div>
+      </div>
+
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85" alt="Pasta">
+        <div class="gallery-overlay">Fresh Pasta</div>
+      </div>
+
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=85" alt="Dessert">
+        <div class="gallery-overlay">Sweet Finish</div>
+      </div>
+
+      <div class="gallery-item large reveal">
+        <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=85" alt="Restaurant">
+        <div class="gallery-overlay">URBAN SPICE</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     BOOKING
+     ===================================================== -->
+
+<section id="booking">
+
+  <div class="container">
+
+    <div class="section-heading reveal">
+
+      <small>Reservations</small>
+
+      <h2>Reserve Your Table</h2>
+
+      <p>
+        Make your next dining experience extraordinary.
+      </p>
+
+    </div>
+
+
+    <div class="booking-box reveal">
+
+      <form class="booking-form" id="bookingForm">
+
+        <div class="form-group">
+
+          <label>Your Name</label>
+
+          <input
+            type="text"
+            placeholder="Enter your name"
+            required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Phone</label>
+
+          <input
+            type="tel"
+            placeholder="Enter phone number"
+            required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Date</label>
+
+          <input type="date" required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Time</label>
+
+          <input type="time" required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Guests</label>
+
+          <select required>
+
+            <option value="">Select guests</option>
+            <option>1 Guest</option>
+            <option>2 Guests</option>
+            <option>3 Guests</option>
+            <option>4 Guests</option>
+            <option>5 Guests</option>
+            <option>6+ Guests</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Occasion</label>
+
+          <select>
+
+            <option>Regular Dinner</option>
+            <option>Birthday</option>
+            <option>Anniversary</option>
+            <option>Business Dinner</option>
+            <option>Other</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group full">
+
+          <label>Special Request</label>
+
+          <textarea
+            placeholder="Any special request?"></textarea>
+
+        </div>
+
+
+        <button type="submit">
+          Confirm Reservation
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     REVIEWS
+     ===================================================== -->
+
+<section id="reviews">
+
+  <div class="container">
+
+    <div class="section-heading">
+
+      <small>Guest Stories</small>
+
+      <h2>What People Say</h2>
+
+    </div>
+
+
+    <div class="review-container">
+
+      <div class="review active">
+
+        <div class="stars">★★★★★</div>
+
+        <p>
+          “An incredible dining experience.
+          Every dish felt carefully crafted and beautifully presented.”
+        </p>
+
+        <h4>— AARAV SHARMA</h4>
+
+      </div>
+
+
+      <div class="review">
+
+        <div class="stars">★★★★★</div>
+
+        <p>
+          “The atmosphere, service and food were all exceptional.
+          Definitely one of my favourite places.”
+        </p>
+
+        <h4>— PRIYA MEHRA</h4>
+
+      </div>
+
+
+      <div class="review">
+
+        <div class="stars">★★★★★</div>
+
+        <p>
+          “The flavours were amazing and the presentation
+          was absolutely beautiful.”
+        </p>
+
+        <h4>— RAHUL VERMA</h4>
+
+      </div>
+
+
+      <div class="review-controls">
+
+        <button id="prevReview">←</button>
+
+        <button id="nextReview">→</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT
+     ===================================================== -->
+
+<section id="contact">
+
+  <div class="container">
+
+    <div class="section-heading">
+
+      <small>Find Us</small>
+
+      <h2>Come Say Hello</h2>
+
+    </div>
+
+
+    <div class="contact-grid">
+
+      <div class="contact-card reveal">
+
+        <div class="contact-icon">📍</div>
+
+        <h3>Location</h3>
+
+        <p>
+          21 Food Street,<br>
+          Gomti Nagar, Lucknow,<br>
+          Uttar Pradesh, India
+        </p>
+
+      </div>
+
+
+      <div class="contact-card reveal">
+
+        <div class="contact-icon">☎</div>
+
+        <h3>Call Us</h3>
+
+        <p>
+          +91 98765 43210<br>
+          +91 91234 56789
+        </p>
+
+      </div>
+
+
+      <div class="contact-card reveal">
+
+        <div class="contact-icon">✉</div>
+
+        <h3>Email</h3>
+
+        <p>
+          hello@urbanspice.com<br>
+          reservations@urbanspice.com
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer>
+
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+
+        <h2>URBAN SPICE</h2>
+
+        <p>
+          Taste the Extraordinary.
+          A modern restaurant experience built around
+          flavour, creativity and unforgettable moments.
+        </p>
+
+      </div>
+
+
+      <div class="footer-col">
+
+        <h4>Explore</h4>
+
+        <a href="#about">Our Story</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Reviews</a>
+
+      </div>
+
+
+      <div class="footer-col">
+
+        <h4>Visit</h4>
+
+        <a href="#booking">Reservations</a>
+        <a href="#contact">Contact</a>
+        <a href="#">Directions</a>
+        <a href="#">Events</a>
+
+      </div>
+
+
+      <div class="footer-col">
+
+        <h4>Social</h4>
+
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">YouTube</a>
+        <a href="#">WhatsApp</a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+      © 2026 URBAN SPICE. All Rights Reserved.
+
+      <br><br>
+
+      Designed with ❤️ for extraordinary food.
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script>
+
+  /* =====================================================
+     MENU DATA
+     ===================================================== */
+
+  const menuData = {
+
+    starters: [
+
+      {
+        name: "Truffle Mushroom",
+        description: "Wild mushrooms, truffle cream and herbs.",
+        price: "₹395",
+        image: "https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Crispy Chicken",
+        description: "Golden chicken bites with signature spice glaze.",
+        price: "₹425",
+        image: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Paneer Tikka",
+        description: "Smoked cottage cheese with peppers and spices.",
+        price: "₹345",
+        image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Bruschetta",
+        description: "Grilled sourdough, tomatoes, basil and olive oil.",
+        price: "₹295",
+        image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=500&q=80"
+      }
+
+    ],
+
+
+    main: [
+
+      {
+        name: "Butter Chicken",
+        description: "Tender chicken in rich tomato butter sauce.",
+        price: "₹495",
+        image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Royal Paneer",
+        description: "Creamy paneer curry with aromatic spices.",
+        price: "₹425",
+        image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Grilled Chicken",
+        description: "Herb-marinated chicken with roasted vegetables.",
+        price: "₹575",
+        image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Lamb Rogan Josh",
+        description: "Slow-cooked lamb with Kashmiri spices.",
+        price: "₹625",
+        image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=500&q=80"
+      }
+
+    ],
+
+
+    pizza: [
+
+      {
+        name: "Truffle Pizza",
+        description: "Mozzarella, mushrooms and black truffle.",
+        price: "₹525",
+        image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Margherita",
+        description: "Tomato, fresh mozzarella and basil.",
+        price: "₹395",
+        image: "https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Penne Alfredo",
+        description: "Creamy parmesan sauce with fresh herbs.",
+        price: "₹445",
+        image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Arrabbiata",
+        description: "Penne pasta with spicy tomato sauce.",
+        price: "₹395",
+        image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=500&q=80"
+      }
+
+    ],
+
+
+    dessert: [
+
+      {
+        name: "Chocolate Fondant",
+        description: "Warm chocolate cake with molten centre.",
+        price: "₹295",
+        image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Tiramisu",
+        description: "Classic Italian dessert with espresso and mascarpone.",
+        price: "₹325",
+        image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Cheesecake",
+        description: "Silky cheesecake with berry compote.",
+        price: "₹295",
+        image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Gulab Jamun",
+        description: "Traditional dessert served with vanilla ice cream.",
+        price: "₹245",
+        image: "https://images.unsplash.com/photo-1666190094767-3b4c1a9a4e88?auto=format&fit=crop&w=500&q=80"
+      }
+
+    ],
+
+
+    drinks: [
+
+      {
+        name: "Mango Basil Cooler",
+        description: "Fresh mango, basil and citrus.",
+        price: "₹195",
+        image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Classic Mojito",
+        description: "Mint, lime and sparkling soda.",
+        price: "₹225",
+        image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Cold Coffee",
+        description: "Rich espresso blended with chilled milk.",
+        price: "₹185",
+        image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=500&q=80"
+      },
+
+      {
+        name: "Berry Fizz",
+        description: "Mixed berries, citrus and sparkling water.",
+        price: "₹215",
+        image: "https://images.unsplash.com/photo-1497534446932-c925b458314e?auto=format&fit=crop&w=500&q=80"
+      }
+
+    ]
+
+  };
+
+
+    /* =====================================================
+       25 ADDITIONAL MENU ITEMS
+       ===================================================== */
+
+    menuData.starters.push(
+      {
+        name: "Peri Peri Chicken Wings",
+        description: "Crispy chicken wings tossed in smoky peri peri sauce.",
+        price: "₹445",
+        image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Crispy Corn",
+        description: "Crunchy sweet corn with herbs, chilli and spices.",
+        price: "₹295",
+        image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Hara Bhara Kebab",
+        description: "Spinach and green pea kebabs served with mint chutney.",
+        price: "₹325",
+        image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Loaded Nachos",
+        description: "Crispy nachos layered with cheese, salsa and jalapeños.",
+        price: "₹365",
+        image: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Garlic Prawns",
+        description: "Juicy prawns sautéed with garlic, butter and herbs.",
+        price: "₹595",
+        image: "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=700&q=85"
+      }
+    );
+
+    menuData.main.push(
+      {
+        name: "Chicken Biryani",
+        description: "Fragrant basmati rice, tender chicken and aromatic spices.",
+        price: "₹475",
+        image: "https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Paneer Butter Masala",
+        description: "Soft paneer cooked in a creamy tomato and butter gravy.",
+        price: "₹425",
+        image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Dal Makhani",
+        description: "Slow-cooked black lentils finished with butter and cream.",
+        price: "₹345",
+        image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Veg Dum Biryani",
+        description: "Basmati rice layered with vegetables, saffron and spices.",
+        price: "₹395",
+        image: "https://images.unsplash.com/photo-1599043513900-ed6fe01d3833?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Tandoori Chicken",
+        description: "Char-grilled chicken marinated in yogurt and Indian spices.",
+        price: "₹545",
+        image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=700&q=85"
+      }
+    );
+
+    menuData.pizza.push(
+      {
+        name: "Farmhouse Pizza",
+        description: "Loaded with bell peppers, onions, mushrooms and mozzarella.",
+        price: "₹465",
+        image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Chicken Tikka Pizza",
+        description: "Tandoori chicken, mozzarella, peppers and signature sauce.",
+        price: "₹545",
+        image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Pesto Pasta",
+        description: "Fresh pasta tossed in basil pesto, parmesan and cherry tomatoes.",
+        price: "₹465",
+        image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Spaghetti Aglio e Olio",
+        description: "Spaghetti with garlic, olive oil, chilli flakes and herbs.",
+        price: "₹395",
+        image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Four Cheese Pizza",
+        description: "A rich blend of mozzarella, parmesan, cheddar and blue cheese.",
+        price: "₹575",
+        image: "https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=700&q=85"
+      }
+    );
+
+    menuData.dessert.push(
+      {
+        name: "Red Velvet Cake",
+        description: "Moist red velvet cake layered with smooth cream cheese frosting.",
+        price: "₹325",
+        image: "https://images.unsplash.com/photo-1586788224331-947f68671cf1?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Brownie Sundae",
+        description: "Warm chocolate brownie topped with vanilla ice cream and sauce.",
+        price: "₹345",
+        image: "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Mango Cheesecake",
+        description: "Creamy cheesecake with a bright seasonal mango topping.",
+        price: "₹335",
+        image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Chocolate Mousse",
+        description: "Silky dark chocolate mousse finished with cocoa and berries.",
+        price: "₹295",
+        image: "https://images.unsplash.com/photo-1541783245831-57d6fb0926d3?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Kulfi Falooda",
+        description: "Creamy Indian kulfi with falooda, rose syrup and nuts.",
+        price: "₹275",
+        image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=700&q=85"
+      }
+    );
+
+    menuData.drinks.push(
+      {
+        name: "Strawberry Mojito",
+        description: "Fresh strawberries, mint, lime and sparkling soda.",
+        price: "₹245",
+        image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Watermelon Cooler",
+        description: "Fresh watermelon, lime and mint served ice cold.",
+        price: "₹215",
+        image: "https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Iced Latte",
+        description: "Smooth espresso, chilled milk and a light coffee foam.",
+        price: "₹225",
+        image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Chocolate Shake",
+        description: "Rich chocolate shake topped with creamy foam and cocoa.",
+        price: "₹265",
+        image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=700&q=85"
+      },
+      {
+        name: "Fresh Lime Soda",
+        description: "Refreshing lime, soda and mint with a balanced citrus kick.",
+        price: "₹165",
+        image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=700&q=85"
+      }
+    );
+
+
+  /* =====================================================
+     LOAD MENU
+     ===================================================== */
+
+  const menuGrid = document.getElementById("menuGrid");
+  const menuTabs = document.querySelectorAll(".menu-tab");
+
+  function loadMenu(category) {
+
+    menuGrid.innerHTML = "";
+
+    const menuCount = document.getElementById("menuCount");
+    if (menuCount) {
+      menuCount.textContent = `${menuData[category].length} dishes available`;
+    }
+
+    menuData[category].forEach((item, index) => {
+
+      const div = document.createElement("div");
+
+      div.className = "menu-item";
+
+      div.innerHTML = `
+
+        <div class="menu-img">
+
+          <img
+            src="${item.image}"
+            alt="${item.name}"
+            loading="lazy">
+
+        </div>
+
+        <div class="menu-info">
+
+          <div class="menu-top">
+
+            <h4>${item.name}</h4>
+
+            <span class="price">
+              ${item.price}
+            </span>
+
+          </div>
+
+          <p>
+            ${item.description}
+          </p>
+
+        </div>
+
+      `;
+
+      menuGrid.appendChild(div);
+
+    });
+
+  }
+
+  loadMenu("starters");
+
+
+  menuTabs.forEach(tab => {
+
+    tab.addEventListener("click", () => {
+
+      menuTabs.forEach(t =>
+        t.classList.remove("active")
+      );
+
+      tab.classList.add("active");
+
+      loadMenu(tab.dataset.category);
+
+    });
+
+  });
+
+
+  /* =====================================================
+     MOBILE NAVIGATION
+     ===================================================== */
+
+  const hamburger =
+    document.getElementById("hamburger");
+
+  const navLinks =
+    document.getElementById("navLinks");
+
+  hamburger.addEventListener("click", () => {
+
+    navLinks.classList.toggle("active");
+
+  });
+
+
+  document.querySelectorAll(".nav-links a")
+    .forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        navLinks.classList.remove("active");
+
+      });
+
+    });
+
+
+  /* =====================================================
+     STICKY HEADER
+     ===================================================== */
+
+  const header =
+    document.getElementById("header");
+
+  window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 60) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+
+  });
+
+
+  /* =====================================================
+     SCROLL REVEAL
+     ===================================================== */
+
+  const reveals =
+    document.querySelectorAll(".reveal");
+
+  const observer =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add("show");
+
+          }
+
+        });
+
+      },
+      {
+        threshold: .12
+      }
+    );
+
+
+  reveals.forEach(el => observer.observe(el));
+
+
+  /* =====================================================
+     REVIEWS CAROUSEL
+     ===================================================== */
+
+  const reviews =
+    document.querySelectorAll(".review");
+
+  let currentReview = 0;
+
+  function showReview(index) {
+
+    reviews.forEach(review =>
+      review.classList.remove("active")
+    );
+
+    reviews[index].classList.add("active");
+
+  }
+
+
+  document.getElementById("nextReview")
+    .addEventListener("click", () => {
+
+      currentReview =
+        (currentReview + 1) % reviews.length;
+
+      showReview(currentReview);
+
+    });
+
+
+  document.getElementById("prevReview")
+    .addEventListener("click", () => {
+
+      currentReview =
+        (currentReview - 1 + reviews.length)
+        % reviews.length;
+
+      showReview(currentReview);
+
+    });
+
+
+  /* =====================================================
+     BOOKING FORM
+     ===================================================== */
+
+  document.getElementById("bookingForm")
+    .addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      alert(
+        "Thank you! Your reservation request has been received. " +
+        "This is a front-end demo, so no real booking was created."
+      );
+
+      this.reset();
+
+    });
+
+
+  /* =====================================================
+     THREE.JS BACKGROUND
+     ===================================================== */
+
+  const scene =
+    new THREE.Scene();
+
+  const camera =
+    new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      .1,
+      1000
+    );
+
+  const renderer =
+    new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true
+    });
+
+  renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+  );
+
+  renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio, 2)
+  );
+
+  document
+    .getElementById("three-bg")
+    .appendChild(renderer.domElement);
+
+
+  /* Floating particles */
+
+  const geometry =
+    new THREE.BufferGeometry();
+
+  const particleCount = 500;
+
+  const positions =
+    new Float32Array(
+      particleCount * 3
+    );
+
+  for (let i = 0; i < particleCount * 3; i++) {
+
+    positions[i] =
+      (Math.random() - .5) * 20;
+
+  }
+
+  geometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(
+      positions,
+      3
+    )
+  );
+
+
+  const material =
+    new THREE.PointsMaterial({
+      color: 0xd7a84b,
+      size: .025,
+      transparent: true,
+      opacity: .8
+    });
+
+
+  const particles =
+    new THREE.Points(
+      geometry,
+      material
+    );
+
+
+  scene.add(particles);
+
+  camera.position.z = 8;
+
+
+  function animate() {
+
+    requestAnimationFrame(animate);
+
+    particles.rotation.y += .0005;
+    particles.rotation.x += .0002;
+
+    renderer.render(
+      scene,
+      camera
+    );
+
+  }
+
+  animate();
+
+
+  /* =====================================================
+     THREE.JS RESPONSIVE
+     ===================================================== */
+
+  window.addEventListener("resize", () => {
+
+    camera.aspect =
+      window.innerWidth /
+      window.innerHeight;
+
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(
+      window.innerWidth,
+      window.innerHeight
+    );
+
+  });
+
+
+  /* =====================================================
+     PARALLAX
+     ===================================================== */
+
+  window.addEventListener("scroll", () => {
+
+    const hero =
+      document.getElementById("hero");
+
+    const offset =
+      window.scrollY * .25;
+
+    hero.style.backgroundPosition =
+      `center calc(50% + ${offset}px)`;
+
+  });
+
+</script>
+
+</body>
+</html>
+```
